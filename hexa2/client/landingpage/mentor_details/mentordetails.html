@@ -1,0 +1,137 @@
+<template name="mentordetails">
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 >Mentor Profile</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                        <img alt="User Pic" src="../images/{{idmentor.img_pic}}" id="profile-image1" class="img-circle img-responsive" width="300">
+                    </div>
+                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                        <h3 class="">{{idmentor.nm_mentor}}</h3>
+                        <p>Lokasi   <b> {{idmentor.lokasi}}</b></p>
+                        <i>Joining At: {{CustomDate idmentor.created_date}}</i>
+                    </div>
+                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                        <br/>
+                    </div>
+                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="panel-title expand">
+                                        <div class="right-arrow pull-right">+</div>
+                                        <!--<a href="#">Collapsible Group 1</a>-->
+                                        Kemampuan Bahasa
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <table class="table table-hover table-striped">
+                                            <thead>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Aktif</td>
+                                            <td>Passif</td>
+                                            </thead>
+                                            <tbody>
+                                            {{#each mentorBahasa}}
+                                            <tr>
+                                                <td>
+                                                    <img src="../images/{{flag_pic}}" class="img-circle" width="30">
+                                                </td>
+                                                <td>
+                                                    Bahasa<br>
+                                                    <b>{{bahasa_pengantar}}</b>
+                                                </td>
+
+                                                <td>
+                                                    <b>{{aktif}}</b>
+                                                </td>
+                                                <td>{{passif}}</td>
+                                                <!--<td>-->
+                                            </tr>
+                                            {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="panel-title expand">
+                                            <div class="right-arrow pull-right">+</div>
+                                            <!--<a href="#">Collapsible Group 2</a>-->
+                                            Riwayat Pendidikan
+                                        </h4>
+                                    </div>
+                                    <div id="collapse2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <table class="table table-hover table-striped">
+                                                <thead>
+                                                <td>Kategori</td>
+                                                <td>Jenjang Pendidikan</td>
+                                                <td>Mulai</td>
+                                                <td>Selesai</td>
+                                                </thead>
+                                                <tbody>
+                                                {{#each mentorPend}}
+                                                    <tr>
+                                                        <td>
+                                                            {{tipepend}}
+                                                        </td>
+                                                        <td>
+                                                            <b>{{desc_pend}}</b>
+                                                        </td>
+
+                                                        <td>
+                                                            <b>{{prettifyDateMulai mulai_pend}}</b>
+                                                        </td>
+                                                        <td>{{prettifyDateSelesai selesai_pend}}</td>
+                                                        <!--<td>-->
+                                                    </tr>
+                                                {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="panel-title expand">
+                                                <div class="right-arrow pull-right">+</div>
+                                                <!--<a href="#">Collapsible Group 3</a>-->
+                                                Prestasi & Penghargaan
+                                            </h4>
+                                        </div>
+                                        <div id="collapse3" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <table class="table table-hover table-striped">
+                                                    {{#if isValue}}
+                                                        Blum ada data
+                                                    {{else}}
+                                                    {{#each mentorPrestasi}}
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                {{desc_prestasi}}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    {{/each}}
+                                                    {{/if}}
+                                                </table>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" id="btn_test" class="fa-btn btn-1 btn-1e pull-right">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>

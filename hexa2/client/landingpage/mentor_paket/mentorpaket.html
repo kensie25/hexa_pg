@@ -1,0 +1,47 @@
+<template name="mentorpaket">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <h3>Paket Mentor </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    {{#each datapaket}}
+                    <div class="col-md-4 col-xs-12 col-lg-4">
+                        <div class="well">
+                            <h2 class="text-info">{{kelas}}</h2>
+                            <p><span class="label label-info">{{jns_pddk}}</span></p>
+                            <ul>
+                                <li>Kategori Belajar <span><strong>{{kategori}}</strong></span></li>
+                                <li>Tipe Group <span><strong>{{tipe_group}}</strong></span></li>
+                                <li>Jenjang <span><strong>{{jenjang}}</strong></span></li>
+                                <li>Materi Belajar <span><strong>{{materi}}</strong></span></li>
+                            </ul>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</p>
+
+                            <hr>
+                            <ul>
+                                {{#each mentorPaketDetails}}
+                                <li>
+                                    {{harga_paket}}
+                                </li>
+                                {{/each}}
+                            </ul>
+                            <hr>
+                            <!--<h3>$15.99 / month</h3>-->
+                            <hr>
+                            <div class="col-md-offset-3">
+                                <a href="#" id="btn_test" class="fa-btn btn-1 btn-1e">read more</a>
+                            </div>
+
+                            <p></p>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

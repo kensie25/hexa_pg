@@ -1,0 +1,43 @@
+<template name="mentorlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <h3>List Mentor </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    {{#if Template.subscriptionsReady}}
+                        {{#each MentorList}}
+                        <div class="col-md-4 col-xs-12 col-lg-4">
+                            <div class="well">
+                                <span class="text-center"><img src="./images/{{img_pic}}" class="img-responsive img-circle" alt="a" style="width: 400px"></span>
+                                <h2 class="text-info text-center">
+                                    {{nm_mentor}}
+                                </h2>
+                                    {{> rating value=rating datamentor=rating disabled=true}}
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis
+                                    sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.
+                                </p>
+                                <hr>
+                                <div class="col-md-offset-3">
+                                    <a href="#" id="btn_test" class="fa-btn btn-1 btn-1e">read more</a>
+                                </div>
+
+                                <p></p>
+                            </div>
+                        </div>
+                        {{/each}}
+                    {{else}}
+                    <div class="col-md-offset-4 col-md-4 col-xs-12 col-lg-offset-4 col-lg-4">
+                        <img src="./logos/loading.gif" class="img-responsive img-circle" alt="a" style="width: 400px">
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

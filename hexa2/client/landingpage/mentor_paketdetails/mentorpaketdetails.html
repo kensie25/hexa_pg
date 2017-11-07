@@ -1,0 +1,133 @@
+<template name="mentorpaketdetail">
+    <div class="container">
+    {{#if Template.subscriptionsReady}}
+    {{#if isDataPaket}}
+        <h2>Data Kosong</h2>
+        {{else}}
+        <div class="row">
+            {{#each datapaket}}
+            <div class="[ col-xs-12 col-sm-offset-1 col-sm-10 ]" style="margin-top: 20px;">
+                <ul class="event-list">
+                    <li>
+                        <!--<time datetime="2014-07-20">-->
+                            <!--<span class="day">4</span>-->
+                            <!--<span class="month">Jul</span>-->
+                            <!--<span class="year">2014</span>-->
+                            <!--<span class="time">ALL DAY</span>-->
+                        <!--</time>-->
+
+                        <time datetime="">
+                            <span class="year">{{jenjang}}</span>
+                            <span class="month">Kelas</span>
+                            <span class="day">6</span>
+                        </time>
+                        <!--<img src="./logos/logo_matematika2.png" class="img-circle" alt="Cinque Terre" style="width:15%">-->
+                        <div class="info">
+                            <h2 class="title">
+                                {{materi}}
+                            </h2>
+                            <!--<span class="label label-primary">Pendidikan Formal</span>-->
+                            <!--<p class="label label-primary" style="margin-left: 10px;">-->
+                                <!--Pendidikan Formal-->
+                                <!--<span class="pull-right">-->
+                                    <!--<button class="btn btn-danger btn-lg">PESAN</button>-->
+                                <!--</span>-->
+                            <!--</p>-->
+                            <!--<p class="desc">-->
+
+                                <!--<span class="pull-right">-->
+                                    <!--<button class="btn btn-danger btn-lg">PESAN</button>-->
+                                <!--</span>-->
+                                <!--Jumlah Frekwensi Pertemuan : 8 x Pertemuan-->
+                            <!--</p>-->
+                            <div class="table-responsive">
+                                <table class="desc table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <td class="text-center">Frekuensi</td>
+                                        <td class="text-center">Durasi</td>
+                                        <td class="text-center">Kategori</td>
+                                        <td class="text-center">Tipe</td>
+                                        <td class="text-right">Discount</td>
+                                        <td class="text-right">Harga Paket</td>
+                                        <td class="text-center">ACT</td>
+                                    </tr>
+                                    <!--<tr>-->
+                                        <!--<td class="text-center" colspan="4">pertemuan</td>-->
+                                        <!--<td class="text-center" colspan="2">(Rp.)</td>-->
+                                    <!--</tr>-->
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">{{jum_frek}} x <br>Pertemuan</td>
+                                            <td class="text-center">{{durasi_frek}} <br>{{stn_durasi}}</td>
+                                            <td class="text-center">{{kategori}}</td>
+                                            <td class="text-center">{{tipe_group}}</td>
+                                            <td class="text-right">{{disc_paket}}</td>
+                                            <td class="text-right">{{harga_paket}},-</td>
+                                            <td class="text-center">
+                                                <!--<a href="../mentorjadwal/{{idmentor}}/idpaketdtl/{{idpaketdtl}}" class="btn btn-danger btn-sm">PESAN</a>-->
+                                                <a href="../../mentorjadwal/{{idmentor}}" class="btn btn-danger btn-sm">PESAN</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--<div class="social">-->
+                            <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li class="facebook" style="width:50%;"><a href="#facebook"><span class="fa fa-facebook"></span></a></li>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li class="twitter" style="width:50%;"><a href="#twitter"><span class="fa fa-twitter"></span></a></li>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li class="google-plus" style="width:50%;"><a href="#google-plus"><span class="fa fa-google-plus"></span></a></li>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                        <!--</div>-->
+                    </li>
+                    <!--<li>-->
+                        <!--<time datetime="2014-07-20 0000">-->
+                            <!--<span class="day">8</span>-->
+                            <!--<span class="month">Jul</span>-->
+                            <!--<span class="year">2014</span>-->
+                            <!--<span class="time">12:00 AM</span>-->
+                        <!--</time>-->
+                        <!--<div class="info">-->
+                            <!--<h2 class="title">One Piece Unlimited World Red</h2>-->
+                            <!--<p class="desc">PS Vita</p>-->
+                            <!--<ul>-->
+                                <!--<li style="width:50%;"><a href="#website"><span class="fa fa-globe"></span> Website</a></li>-->
+                                <!--<li style="width:50%;"><span class="fa fa-money"></span> $39.99</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                        <!--<div class="social">-->
+                            <!--<ul>-->
+                                <!--<li class="facebook" style="width:33%;"><a href="#facebook"><span class="fa fa-facebook"></span></a></li>-->
+                                <!--<li class="twitter" style="width:34%;"><a href="#twitter"><span class="fa fa-twitter"></span></a></li>-->
+                                <!--<li class="google-plus" style="width:33%;"><a href="#google-plus"><span class="fa fa-google-plus"></span></a></li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+    {{else}}
+        {{> loader}}
+    {{/if}}
+    </div>
+
+</template>
+
+<template name="loader">
+    <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+  <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+    <animateTransform attributeType="xml"
+      attributeName="transform"
+      type="rotate"
+      from="0 25 25"
+      to="360 25 25"
+      dur="0.6s"
+      repeatCount="indefinite"/>
+    </path>
+  </svg>
+</template>
