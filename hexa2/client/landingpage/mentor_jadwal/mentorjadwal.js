@@ -42,7 +42,14 @@ Template.mentorjadwal.onRendered(function(){
                 $('#add-edit-event').html(date.format());
                 $('#reloaddata').click();
             },
-            events: jadwal
+            events: jadwal,
+            eventClick: function(events){
+                $(this).css('border-color', 'red');
+                $('#view-event-modal').modal( 'show' );
+                $('#title-modal-event').html(events.title);
+                $('#input-start').val(moment(events.start).format('LLLL'));
+                $('#input-end').val(moment(events.end).format('LLLL'));
+            }
         });
         //$('#loading').show();
         Meteor.setTimeout(function(){
