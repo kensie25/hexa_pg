@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5107ef8e-6cbe-4d40-8421-861c6ea32dc4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hexa2/client/landingpage/mentor_jadwal/mentorjadwal.js" afterPath="$PROJECT_DIR$/hexa2/client/landingpage/mentor_jadwal/mentorjadwal.js" />
-    </list>
+    <list default="true" id="5107ef8e-6cbe-4d40-8421-861c6ea32dc4" name="Default" comment="" />
     <ignored path="hexa_git.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
