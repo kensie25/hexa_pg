@@ -3,7 +3,7 @@
  */
 exports.dbconfig = {
     host : '159.89.202.241',
-    user : 'pesangurudb',
-    password : '@pg123',
-    database : 'hexa'
+    user : 'xxxxxxxxxxx',
+    password : 'xxxxxx',
+    database : 'xxxx'
 };

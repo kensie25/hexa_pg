@@ -19,9 +19,9 @@ Meteor.startup(function(){
         try {
             mysql.createConnection({
                 host : '159.89.202.241',
-                user : 'pesangurudb',
-                password : '@pg123',
-                database : 'hexa'
+                user : 'xxxxxxxxxxx',
+                password : 'xxxxxx',
+                database : 'xxxx'
             }).then(conn => {
                 connection = conn;
             return connection.query('SELECT 1 + 1 AS Success_Connect');
