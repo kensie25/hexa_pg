@@ -5,17 +5,6 @@ import { mentor } from './SqlQuery';
 
 Meteor.startup(function(){
     let connection;
-    //mysql.createConnection({
-    //    host : 'localhost',
-    //    user : 'root',
-    //    password : 'x',
-    //    database : 'hexa2'
-    //}).then(function(conn){
-    //    connection = conn;
-    //    return connection.query('SELECT 1 + 1 AS Success_Connect');
-    //}).then(function(result){
-    //    console.log(result);
-    //});
         try {
             mysql.createConnection({
                 host : '159.89.202.241',
