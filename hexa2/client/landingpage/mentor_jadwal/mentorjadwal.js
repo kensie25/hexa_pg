@@ -67,6 +67,7 @@ Template.mentorjadwal.helpers({
 
 Template.mentorjadwal.onCreated(function() {
 
+
 });
 
 Template.mentorjadwal.onRendered(function(){
@@ -105,6 +106,32 @@ Template.mentorjadwal.onRendered(function(){
                 //events: jadwal
                 events: Session.get('mentorjadwal')
             });
+
+            $('#tglklik').datetimepicker();
+            $('#mulai').datetimepicker({
+                format:'HH:mm:ss'
+            });
+            $('#selesai').datetimepicker({
+                format:'HH:mm:ss'
+            });
+            $('#mulai').on('dp.change', function(e){
+                var durasi = $('#durasi').val();
+                var mulaipukul = $(this).val();
+                var jambelajar = (parseInt(mulaipukul.substr(0, 2)) * 60) + parseInt(mulaipukul.substr(3, 2));
+                var totdurasi = parseInt(jambelajar) + parseInt(durasi);
+                var jamselesai = parseInt(totdurasi / 60);
+                var mod = parseInt(totdurasi % 60);
+                if(mod!=0){
+                    $('#selesai').val(jamselesai+':'+mod+':00');
+                    console.log(jamselesai+':'+mod);
+                    if(mod < 10){
+                        $('#selesai').val(jamselesai+':0:00'+mod);
+                    }
+                }
+                else{
+                    $('#selesai').val(jamselesai+':00:00');
+                }
+            });
         }, 1000);
     }else{
         $('#calendar').fullCalendar({
@@ -135,29 +162,35 @@ Template.mentorjadwal.onRendered(function(){
             //events: jadwal
             events: Session.get('mentorjadwal')
         });
+
+        $('#tglklik').datetimepicker();
+        $('#mulai').datetimepicker({
+            format:'HH:mm:ss'
+        });
+        $('#selesai').datetimepicker({
+            format:'HH:mm:ss'
+        });
+        $('#mulai').on('dp.change', function(e){
+            var durasi = $('#durasi').val();
+            var mulaipukul = $(this).val();
+            var jambelajar = (parseInt(mulaipukul.substr(0, 2)) * 60) + parseInt(mulaipukul.substr(3, 2));
+            var totdurasi = parseInt(jambelajar) + parseInt(durasi);
+            var jamselesai = parseInt(totdurasi / 60);
+            var mod = parseInt(totdurasi % 60);
+            if(mod!=0){
+                $('#selesai').val(jamselesai+':'+mod+':00');
+                console.log(jamselesai+':'+mod);
+                if(mod < 10){
+                    $('#selesai').val(jamselesai+':0:00'+mod);
+                }
+            }
+            else{
+                $('#selesai').val(jamselesai+':00:00');
+            }
+        });
     };
 
-    $('#tglklik').datetimepicker();
-    var mulaipukul = $('#mulai').datetimepicker({
-        format:'HH:mm'
-    });
-    $('#mulai').on('dp.change', function(e){
-        var durasi = $('#durasi').val();
-        var mulaipukul = $(this).val();
-        var jambelajar = (parseInt(mulaipukul.substr(0, 2)) * 60) + parseInt(mulaipukul.substr(3, 2));
-        var totdurasi = parseInt(jambelajar) + parseInt(durasi);
-        var jamselesai = parseInt(totdurasi / 60);
-        var mod = parseInt(totdurasi % 60);
-        if(mod!=0){
-            $('#selesai').val(jamselesai+':'+mod);
-            if(mod < 10){
-                $('#selesai').val(jamselesai+':0'+mod);
-            }
-        }
-        else{
-            $('#selesai').val(jamselesai+':00');
-        }
-    });
+
 
 });
 
@@ -169,25 +202,37 @@ Template.mentorjadwal.events({
     },
     'click #booking': function(e){
         e.preventDefault();
-        var sel = "INSERT INTO hexa_mentorjadwal (idmentor, tgl_available, jam_mulai, jam_selesai, idpaket,idpaketdtl, idcust, created_at) " +
-            "VALUE(" +Session.get('idmentorRouter_mentorjadwal')+", " +
-            "'"+$('#tglklik').val()+"', " +
-            "'"+$('#mulai').val()+"', " +
-            "'"+$('#selesai').val()+"', " +
-            "'"+$('#idpaket').val()+"', " +
-            "'"+Session.get('idpaketdtlRouter_mentorjadwal')+"', " +
-            "'"+$('#nm_siswa').val()+"', " +
-            "'"+moment().format('YYYY-MM-DD HH:mm:ss')+"')";
+        var sel = "SELECT idjadwal FROM v_jadwalpaket " +
+            "WHERE " +
+            "((idmentor=1)and(tgl_available='"+$('#tglklik').val()+"')and(sts_available=1))and" +
+            "((jam_mulai BETWEEN '"+$('#mulai').val()+"' and '"+$('#selesai').val()+"')or" +
+            "(jam_selesai BETWEEN '"+$('#mulai').val()+"' and '"+$('#selesai').val()+"'))";
         Meteor.call('reqData', {data:sel}, function(error, result){
-            alert('affectedRows :'+result.affectedRows+' success');
-            //var Newjadwal = Session.get('getDatamentorjadwal');
-            //$('#calendar').fullCalendar('removeEvents');
-            //$('#calendar').fullCalendar('addEventSource', Newjadwal);
-            //$('#calendar').fullCalendar('refetchEvents');
-            window.location = window.location;
-        });
-
-
+            var hasil = result.length;
+            if(hasil === 0){
+                var sel = "INSERT INTO hexa_mentorjadwal (idmentor, tgl_available, jam_mulai, jam_selesai, idpaket,idpaketdtl, idcust, created_at) " +
+                    "VALUE(" +Session.get('idmentorRouter_mentorjadwal')+", " +
+                    "'"+$('#tglklik').val()+"', " +
+                    "'"+$('#mulai').val()+"', " +
+                    "'"+$('#selesai').val()+"', " +
+                    "'"+$('#idpaket').val()+"', " +
+                    "'"+Session.get('idpaketdtlRouter_mentorjadwal')+"', " +
+                    "'"+$('#nm_siswa').val()+"', " +
+                    "'"+moment().format('YYYY-MM-DD HH:mm:ss')+"')";
+                Meteor.call('reqData', {data:sel}, function(error, result){
+                    alert('affectedRows :'+result.affectedRows+' success\n' +
+                        'Jadwal Berhasil disimpan..!');
+                    //var Newjadwal = Session.get('getDatamentorjadwal');
+                    //$('#calendar').fullCalendar('removeEvents');
+                    //$('#calendar').fullCalendar('addEventSource', Newjadwal);
+                    //$('#calendar').fullCalendar('refetchEvents');
+                    window.location = window.location;
+                });
+            }else{
+                console.log(result);
+                alert('Jadwal mulai pukul '+$('#mulai').val()+' sudah digunakan pada tanggal ini..\nSilahkan Memilih waktu yang lain...!');
+            }
+        })
     }
 
 });
