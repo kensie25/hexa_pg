@@ -103,28 +103,26 @@ Router.route('/mentorpaket/:idmentor', function () {
     });
 });
 
-Router.route('/mentorjadwal/:idmentor', function () {
+Router.route('/mentorjadwal/:idmentor/paketdetails/:paketdtl', function () {
     this.render('mentorjadwal', {
         to: "content",
         data: function(){
             var idmentor = this.params.idmentor;
+            var idpaketdtl = this.params.paketdtl;
+            Session.set('idmentorRouter_mentorjadwal', idmentor);
+            Session.set('idpaketdtlRouter_mentorjadwal', idpaketdtl);
             const sel = "SELECT *," +
                 "CONCAT(materi,' ',jenjang, ' ', kelas) as title, " +
                 "CONCAT(tgl_available, ' ', jam_mulai) as start, " +
                 "CONCAT(tgl_available, ' ', jam_selesai) as end " +
-                //"idmentor, " +
-                //"idpaket as kodepaket, " +
-                //"idpaketdtl as kodepaketdtl " +
                 "from v_jadwalpaket " +
-                "WHERE (sts_available=1)and(idmentor = "+idmentor+")";
+                "WHERE (sts_available=1)and(idmentor = "+idmentor+") ";
             Meteor.call('reqData', {data:sel}, function(error, result){
                 Session.set('mentorjadwal', result);
-                var data = Session.get('mentorjadwal');
-                //console.log(data);
             });
             var mentorjadwal = Session.get('mentorjadwal');
-            console.log(mentorjadwal);
-            //console.log(moment(new Date(mentorjadwal)).format("YYYY-MM-dd");
+            //console.log((mentorjadwal));
+            //console.log('router '+idmentor, idpaketdtl);
             return Session.get('mentorjadwal');
         }
     });
